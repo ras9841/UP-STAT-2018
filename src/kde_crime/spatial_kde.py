@@ -6,6 +6,8 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+from plot_utils import roc_plot
+
 # Response Encodings
 CLASS_NVC = -1
 CLASS_VC = 1
@@ -32,7 +34,7 @@ def process_RPD_data(data_loc):
 
     return df_cleaned_xy
 
-def generate_KDE(data, plotDensities=False):
+def generate_KDE(data, plotCity=False, plotDensities=False):
     # Separate based on class
     nvc_idx = data.index[data["class"] == CLASS_NVC]
     vc_idx = data.index[data["class"] == CLASS_VC]
@@ -93,10 +95,16 @@ def generate_KDE(data, plotDensities=False):
         plt.savefig('output.png', dpi=300)
         plt.show()
 
+    if plotCity:
+        # Plot city boundary
+        # x=>long, y=>lat
+        roc_plot(xgrid, ygrid, probs[0])
+
     return probs
 
 if __name__ == "__main__":
     data_loc = "../../data/RPD_crime2011toNow.csv"
     data = process_RPD_data(data_loc)
     print("Completed Processing.")
-    generate_KDE(data, plotDensities=True)
+    probs = generate_KDE(data, plotCity=True)
+
