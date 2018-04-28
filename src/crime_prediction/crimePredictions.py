@@ -52,8 +52,8 @@ def crimeOtherFeaturesWithTime():
 def crimeWeatherPrediction():
     print("----------------BEGIN CRIME WITH WEATHER----------------------------------")
     columns= ['x', 'y', 'date', 'crime', 't_low', 't_high', 't_avg', 'DP_avg', 'DP_high','DP_low' , 'h_avg','h_high', 'h_low', 'v_avg', 'v_low', 'v_high', 'w_avg', 'w_low', 'w_high', 'precip', 'events']
-    columnsToDrop = ['X','Y']
-    data = pd.read_csv('../../data/crime_prediction/weather-crime-data-reduced2-temp.csv')
+    columnsToDrop = ['x','y']
+    data = pd.read_csv('../../data/crime_prediction/weather-crime.csv')
     data.columns=[columns]
     crimeFeatures = Crime(data)
     data = crimeFeatures.preprocessingWeather(columnsToDrop)
@@ -66,5 +66,5 @@ def crimeWeatherPrediction():
 crimeSeason()
 crimeOtherFeatures()
 crimeOtherFeaturesWithTime()
-#crimeWeatherPrediction()
+crimeWeatherPrediction()
 
