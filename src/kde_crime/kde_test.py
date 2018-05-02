@@ -1,6 +1,7 @@
 from spatial_kde import *
-import pandas as pd
 from sklearn.model_selection import train_test_split
+import pandas as pd
+import matplotlib.pyplot as plt
 
 data_loc = "../../data/RPD_crime2011toNow.csv"
 data = process_RPD_data(data_loc)
@@ -27,3 +28,11 @@ for i in range(n_trials):
     yhat = kde.predict(X_te)
     results[i] = compute_accuracy(y, yhat)
     print("Accuracy: %d%%"%(results[i]*100))
+
+results = results*100
+print("Accuracy: (%.3f +/- %.3f)%%"%(results.mean(), results.std())
+results_df = pd.DataFrame(results, columns=[""])
+results_df.boxplot()
+plt.grid(False)
+plt.ylabel("Accuracy (%)")
+plt.show()
