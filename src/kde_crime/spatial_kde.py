@@ -34,6 +34,9 @@ def map_to_class(stat_cc):
     else: # Unknown or nan
         return np.NaN
 
+def compute_accuracy(y, yhat):
+    return sum(y == yhat)/len(y)
+
 class KDE:
     def __init__(self):
         self.nvc_kde = None
@@ -44,9 +47,13 @@ class KDE:
         self.p_of_x = None
     
     def predict(self, data):
-        preds = [self.nvc_kde(data), self.vc_kde(data)]
-        probs = [preds[0]*self.pi_NVC/self.p_of_x, preds[1]*self.pi_VC/self.p_of_x]
-        return probs
+        data = np.vstack([data["X"].ravel(), data["Y"].ravel()])
+        classify = lambda x: CLASS_NVC if x[0] >= x[1] else CLASS_VC
+        s_nvc = self.nvc_kde(data)
+        s_vc = self.vc_kde(data)
+
+        return np.array(list(map(classify, zip(s_nvc, s_vc))))
+
 
     def train(self, data, plotCity=False, plotDensities=False):
         # Separate based on class
