@@ -64,8 +64,7 @@ def convertingWeaponDescriptionFeatureToNumerical(data):
     data= data.replace(to_replace="Fully Automatic Rifle or Machine Gun",value=16)
     data= data.replace(to_replace="Poison",value=17)
     data= data.replace(to_replace="Semiautomatic Rifle",value=18)
-    data= data.replace(to_replace="Explosives",value=15)
-    data= data.replace(to_replace="Single Shot, Pump Action, or Bolt Action Rifle",value=16)
+    data= data.replace(to_replace="Single Shot, Pump Action, or Bolt Action Rifle",value=19)
     return data
 
 

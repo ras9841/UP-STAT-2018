@@ -70,7 +70,12 @@ class Crime:
          y_predict_logistic = classifier_lr.predict(x_test)
         
          cm_logistic = metrics.confusion_matrix(y_test, y_predict_logistic)  
+         print("CONFUSION MATRIX TEST AND PREDICT")
          print(cm_logistic)
+         sns.heatmap(cm_logistic, square=True)
+         plt.show()
+         print ("Coefficient of determination on training set:",classifier_lr.score(x_train, y_train))
+         
         
          acc_logistic = accuracy_score(y_test,y_predict_logistic)
          print("Accuracy Logistic Regression" + str(acc_logistic))
@@ -100,6 +105,8 @@ class Crime:
          recall_svn = recall_score(y_test, y_pred_svc_linear, pos_label=3, average='macro')
         
          print("Recall Linear SVN " + str(recall_svn))
+         print(classifier_svc.coef_)
+         print("classifier_svc.coef_")
          "----------------------------------PERCEPTRON ----------------------------------"
          clf_perceptron = Perceptron(n_iter=2, shuffle=False)
          clf_perceptron.fit(x_train, y_train)

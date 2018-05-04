@@ -42,10 +42,33 @@ def crimeOtherFeaturesWithTime():
     crimeFeatures = Crime(data)
     data = crimeFeatures.preprocessingCrime(columnsToDrop)
     crimeFeatures.exploration()
-    x = np.array(data.iloc[:,9:11].values)# Weapon_Description and Larceny_Type
+    print("data.iloc[:,8]")
+    print(data.iloc[:,8])
+    print("----------------WEAPON----------------------------------")
+    x = np.array(data.iloc[:,9:10].values)# Weapon_Description
     y = np.array(data.iloc[:,8].values)
     crimeFeatures.classification(x,y)
+    print("----------------LOCATION TYPE----------------------------------")
+    print(data.iloc[:,11:12])
+    x = np.array(data.iloc[:,11:12].values)# LOCATION TYPe
+    y = np.array(data.iloc[:,8].values)
+    crimeFeatures.classification(x,y)
+    
+    print("----------------TIME OF THE DAY----------------------------------")
+    x = np.array(data.iloc[:,6:7].values)# 
+    print(data.iloc[:,6:7])
+    y = np.array(data.iloc[:,8].values)
+    crimeFeatures.classification(x,y)
+    
+    print("----------------TIME OF THE DAY- WEAPON ----------------------------------")
+    x = np.array(data.iloc[:,6:7].values)# 
+    print(data.iloc[:,6:7])
+    y = np.array(data.iloc[:,8].values)
+    crimeFeatures.classification(x,y)
+    
+    
     print("----------------END CRIME OTHER FEATURES----------------------------------")
+
 
 
 
@@ -53,6 +76,8 @@ def crimeWeatherPrediction():
     print("----------------BEGIN CRIME WITH WEATHER----------------------------------")
     columns= ['x', 'y', 'date', 'crime', 't_low', 't_high', 't_avg', 'DP_avg', 'DP_high','DP_low' , 'h_avg','h_high', 'h_low', 'v_avg', 'v_low', 'v_high', 'w_avg', 'w_low', 'w_high', 'precip', 'events']
     columnsToDrop = ['x','y']
+    #for printing the correlation matrix
+    #columnsToDrop = ['t_low', 't_high','DP_low', 'DP_high','h_high', 'h_low',  'v_low', 'v_high',  'w_low', 'w_high', ]
     data = pd.read_csv('../../data/crime_prediction/weather-crime.csv')
     data.columns=[columns]
     crimeFeatures = Crime(data)
