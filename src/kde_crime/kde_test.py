@@ -12,6 +12,7 @@ X = data[["X", "Y"]]
 
 print("Starting Predictions")
 n_trials = 25
+
 results = np.zeros([2,n_trials])
 
 for test in range(2):
