@@ -54,6 +54,7 @@ class KDE:
 
         return np.array(list(map(classify, zip(s_nvc, s_vc))))
 
+
     def train(self, data, plotCity=False, plotDensities=False):
         # Separate based on class
         nvc_idx = data.index[data["class"] == CLASS_NVC]
